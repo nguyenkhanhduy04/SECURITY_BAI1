@@ -26,6 +26,14 @@ Caesar: <br>
     + Tần suất (frequency analysis) dùng tần suất ký tự (ví dụ E thường nhất).
     + Đối với văn bản ngắn, brute force đọc nhanh là phổ biến.
 - Kết quả chạy code:
+  <img width="665" height="434" alt="image" src="https://github.com/user-attachments/assets/be82033f-0c8d-4632-9021-30b993b4d83f" />
+
+  <img width="594" height="457" alt="image" src="https://github.com/user-attachments/assets/6f9a29a0-d284-4111-95a1-7e7b29e585b8" />
+
+  <img width="523" height="214" alt="image" src="https://github.com/user-attachments/assets/c64f07e2-375e-47bb-a5be-2d4a3a2258ba" />
+
+
+
 
 Affine: 
 - Tên gọi: Affine cipher: ánh xạ tuyến tính modulo 26: E(x) = (a*x + b) mod 26
@@ -42,6 +50,15 @@ Affine:
     + Có thể dùng known-plaintext attack nếu biết một số cặp.
       
 - Kết quả chạy code:
+
+  <img width="721" height="349" alt="image" src="https://github.com/user-attachments/assets/b38771d4-86ac-4dad-b31f-059427ab3cd8" />
+
+  <img width="841" height="383" alt="image" src="https://github.com/user-attachments/assets/9507cef6-606b-4b54-a7c9-c9fdfab7a241" />
+
+  <img width="543" height="249" alt="image" src="https://github.com/user-attachments/assets/9d9e1cfe-46c0-41c6-a9e6-70f53aae1e5d" />
+
+
+
 
 Hoán Vị: 
 - Tên gọi: Columnar transposition cipher
@@ -61,6 +78,15 @@ Hoán Vị:
       
 - Kết quả chạy code:
 
+  <img width="526" height="347" alt="image" src="https://github.com/user-attachments/assets/d1b7a721-b880-4db7-8c12-d37091342131" />
+
+  <img width="504" height="364" alt="image" src="https://github.com/user-attachments/assets/254878d8-8c83-4e5b-bb0a-e04e6008d941" />
+
+  <img width="572" height="245" alt="image" src="https://github.com/user-attachments/assets/64760113-3a2a-4d12-8444-588a93b36571" />
+
+
+
+
 Vigenère:
 - Tên gọi: Vigenère cipher — cipher dạng polyalphabetic dùng từ khóa lặp.
 - Thuật toán mã hóa: C_i = (P_i + K_{i mod m}) mod 26
@@ -73,6 +99,15 @@ Vigenère:
     + Nếu key ngắn, brute force trên không gian 26^m có thể khả thi với m nhỏ.
       
 - Kết quả chạy code:
+
+  <img width="544" height="329" alt="image" src="https://github.com/user-attachments/assets/0bf8df38-ec06-4e58-b75d-af96ab1a15a4" />
+
+  <img width="650" height="335" alt="image" src="https://github.com/user-attachments/assets/ab1d6a8a-d83a-47ea-aa2a-b0f81f6ee07d" />
+
+  <img width="491" height="248" alt="image" src="https://github.com/user-attachments/assets/1a8ae142-5193-477b-8c3b-fa71247ad7ce" />
+
+
+
 
 PLayFair:
 - Tên gọi: Playfair cipher — mã thay thế theo cặp (digraph), dùng ma trận 5x5.
@@ -87,6 +122,17 @@ PLayFair:
 - Cách phá mã ( mà không cần khóa) :
     + Phân tích digraph (tần suất bigram) — Playfair giữ cấu trúc digraph, có tần suất bigram đặc trưng.
     + Brute-force khóa (khó nếu không có crib), nhưng tấn công dựa trên heuristic & hill-climbing (được dùng trong mật mã học cổ điển) có thể phục hồi bảng.
+      
+- Kết quả chạy code:
+
+  <img width="548" height="260" alt="image" src="https://github.com/user-attachments/assets/16c8f910-4e80-4cbd-abda-63109c50305a" />
+
+  <img width="491" height="339" alt="image" src="https://github.com/user-attachments/assets/40d0e416-b677-40a8-be27-9c578b940519" />
+
+  <img width="517" height="253" alt="image" src="https://github.com/user-attachments/assets/f1961f10-f7e1-49b9-bd66-65c3caf10ea9" />
+
+
+
     + Known-plaintext attack: nếu biết vài cặp, có thể suy ra các vị trí trong bảng.
       
 - Kết quả chạy code:
