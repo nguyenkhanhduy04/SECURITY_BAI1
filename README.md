@@ -122,6 +122,7 @@ PLayFair:
 - Cách phá mã ( mà không cần khóa) :
     + Phân tích digraph (tần suất bigram) — Playfair giữ cấu trúc digraph, có tần suất bigram đặc trưng.
     + Brute-force khóa (khó nếu không có crib), nhưng tấn công dựa trên heuristic & hill-climbing (được dùng trong mật mã học cổ điển) có thể phục hồi bảng.
+    + Known-plaintext attack: nếu biết vài cặp, có thể suy ra các vị trí trong bảng.
       
 - Kết quả chạy code:
 
@@ -133,6 +134,3 @@ PLayFair:
 
 
 
-    + Known-plaintext attack: nếu biết vài cặp, có thể suy ra các vị trí trong bảng.
-      
-- Kết quả chạy code:
