@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Playfair</title>
+</head>
+
+<body>
+    <h3>Playfair Cipher</h3>
+    <textarea id="in" style="width:100%;height:80px">HIDETHEGOLDINTHETREESTUMP</textarea><br> Key: <input id="key" value="PLAYFAIREXAMPLE" />
+    <button onclick="enc()">Encrypt</button>
+    <button onclick="dec()">Decrypt</button>
+    <p><textarea id="out" style="width:100%;height:80px"></textarea></p>
+    <script>
+        function norm(s) {
+            s = s.toUpperCase().replace(/[^A-Z]/g, '').replace(/J/g, 'I');
+            return s;
+        }
+
+        function buildMatrix(key) {
+            key = norm(key);
+            let seen = new Set();
+            let seq = '';
+            for (let ch of key)
+                if (!seen.has(ch)) {
+                    seen.add(ch);
+                    seq += ch;
+                }
+            for (let c = 65; c <= 90; c++) {
+                let ch = String.fromCharCode(c);
+                if (ch === 'J') continue;
+                if (!seen.has(ch)) {
+                    seen.add(ch);
+                    seq += ch;
+                }
+            }
+            let mat = [];
+            for (let r = 0; r < 5; r++) mat.push(seq.slice(r * 5, r * 5 + 5).split(''));
+            return mat;
+        }
+
+        function pos(mat, ch) {
+            for (let r = 0; r < 5; r++)
+                for (let c = 0; c < 5; c++)
+                    if (mat[r][c] === ch) return [r, c];
+            return [-1, -1];
+        }
+
+        function digraphs(s) {
+            s = norm(s);
+            let out = [];
+            for (let i = 0; i < s.length;) {
+                let a = s[i];
+                let b = (i + 1 < s.length) ? s[i + 1] : null;
+                if (b === null) {
+                    out.push(a + 'X');
+                    i++;
+                } else if (a === b) {
+                    out.push(a + 'X');
+                    i++;
+                } else {
+                    out.push(a + b);
+                    i += 2;
+                }
+            }
+            return out;
+        }
+
+        function enc() {
+            let pt = document.getElementById('in').value,
+                key = document.getElementById('key').value;
+            let mat = buildMatrix(key),
+                dg = digraphs(pt),
+                ct = '';
+            for (let d of dg) {
+                let p1 = pos(mat, d[0]),
+                    p2 = pos(mat, d[1]);
+                if (p1[0] === p2[0]) {
+                    ct += mat[p1[0]][(p1[1] + 1) % 5] + mat[p2[0]][(p2[1] + 1) % 5];
+                } else if (p1[1] === p2[1]) {
+                    ct += mat[(p1[0] + 1) % 5][p1[1]] + mat[(p2[0] + 1) % 5][p2[1]];
+                } else {
+                    ct += mat[p1[0]][p2[1]] + mat[p2[0]][p1[1]];
+                }
+            }
+            document.getElementById('out').value = ct;
+        }
+
+        function dec() {
+            let ct = norm(document.getElementById('in').value),
+                key = document.getElementById('key').value;
+            let mat = buildMatrix(key),
+                pt = '';
+            for (let i = 0; i < ct.length; i += 2) {
+                let a = ct[i],
+                    b = ct[i + 1];
+                let p1 = pos(mat, a),
+                    p2 = pos(mat, b);
+                if (p1[0] === p2[0]) {
+                    pt += mat[p1[0]][(p1[1] + 4) % 5] + mat[p2[0]][(p2[1] + 4) % 5];
+                } else if (p1[1] === p2[1]) {
+                    pt += mat[(p1[0] + 4) % 5][p1[1]] + mat[(p2[0] + 4) % 5][p2[1]];
+                } else {
+                    pt += mat[p1[0]][p2[1]] + mat[p2[0]][p1[1]];
+                }
+            }
+            document.getElementById('out').value = pt;
+        }
+    </script>
+</body>
+
+</html>

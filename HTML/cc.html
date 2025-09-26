@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Caesar Cipher</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 16px
+        }
+        
+        textarea {
+            width: 100%;
+            height: 80px
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Caesar Cipher</h3>
+    <textarea id="input" placeholder="Plain or Cipher"></textarea>
+    <br> Key: <input id="key" type="number" value="3" />
+    <button onclick="enc()">Encrypt</button>
+    <button onclick="dec()">Decrypt</button>
+    <p>Result:</p>
+    <textarea id="out"></textarea>
+    <script>
+        function normalize(s) {
+            return s.toUpperCase().replace(/[^A-Z]/g, '');
+        }
+
+        function caesar(s, k) {
+            s = normalize(s);
+            let r = '';
+            k = ((k % 26) + 26) % 26;
+            for (let ch of s) {
+                r += String.fromCharCode((ch.charCodeAt(0) - 65 + k) % 26 + 65);
+            }
+            return r;
+        }
+
+        function enc() {
+            document.getElementById('out').value = caesar(document.getElementById('input').value, parseInt(document.getElementById('key').value));
+        }
+
+        function dec() {
+            document.getElementById('out').value = caesar(document.getElementById('input').value, -parseInt(document.getElementById('key').value));
+        }
+    </script>
+</body>
+
+</html>

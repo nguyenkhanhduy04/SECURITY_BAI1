@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vigenere</title>
+</head>
+
+<body>
+    <h3>Vigenère Cipher</h3>
+    <textarea id="in" style="width:100%;height:80px">ATTACK AT DAWN</textarea><br> Key: <input id="key" value="LEMON" />
+    <button onclick="enc()">Encrypt</button>
+    <button onclick="dec()">Decrypt</button>
+    <p><textarea id="out" style="width:100%;height:80px"></textarea></p>
+    <script>
+        function norm(s) {
+            return s.toUpperCase().replace(/[^A-Z]/g, '');
+        }
+
+        function expandKey(k, len) {
+            k = norm(k);
+            let r = '';
+            for (let i = 0; i < len; i++) r += k[i % k.length];
+            return r;
+        }
+
+        function enc() {
+            let s = norm(document.getElementById('in').value),
+                k = expandKey(document.getElementById('key').value, s.length);
+            let out = '';
+            for (let i = 0; i < s.length; i++) out += String.fromCharCode((s.charCodeAt(i) - 65 + (k.charCodeAt(i) - 65)) % 26 + 65);
+            document.getElementById('out').value = out;
+        }
+
+        function dec() {
+            let s = norm(document.getElementById('in').value),
+                k = expandKey(document.getElementById('key').value, s.length);
+            let out = '';
+            for (let i = 0; i < s.length; i++) out += String.fromCharCode((s.charCodeAt(i) - 65 - (k.charCodeAt(i) - 65) + 26) % 26 + 65);
+            document.getElementById('out').value = out;
+        }
+    </script>
+</body>
+
+</html>
